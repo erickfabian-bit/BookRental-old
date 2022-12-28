@@ -58,7 +58,7 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LibroDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<Results<NotFound, Ok<LibroDto>>> Detele(int id)
+        public async Task<Results<NotFound, Ok<LibroDto>>> Delete(int id)
         {
             var response = await _libroService.EnabledOrDisabled(id);
             if (response == null) return TypedResults.NotFound();

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Dtos.Editoriales;
 
 namespace Application.Dtos.Libros
 {
@@ -11,5 +7,7 @@ namespace Application.Dtos.Libros
         public int Id { get; set; }
         public DateTime FechaRegistro { get; set; }
         public int Estado { get; set; }
+
+        public virtual EditorialDto Editorial { get; set; }
     }
 }
