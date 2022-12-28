@@ -33,6 +33,7 @@ namespace Infrastructure.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new EditorialMap());
+            modelBuilder.ApplyConfiguration(new LibroMap());
         }
     }
 }

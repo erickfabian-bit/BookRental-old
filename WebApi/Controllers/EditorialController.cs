@@ -1,6 +1,5 @@
 ﻿using Application.Dtos.Editoriales;
 using Application.Services.Abstractions;
-using Azure.Core;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 

@@ -44,7 +44,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
         .AsImplementedInterfaces()
         .InstancePerLifetimeScope();
         options.RegisterAssemblyTypes(Assembly.Load("Application"))
-        .Where(x => x.Name.EndsWith("Service"))
+        //.Where(x => x.Name.EndsWith("Service"))
         .AsImplementedInterfaces()
         .InstancePerLifetimeScope();
     });

@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Implementations
 {
-    public class LibroServices : ILibroService
+    public class LibroService : ILibroService
     {
         private readonly IMapper _mapper;
         private readonly ILibroRepository _libroRepository;
-        public LibroServices(IMapper mapper, ILibroRepository libroRepository)
+        public LibroService(IMapper mapper, ILibroRepository libroRepository)
         {
             _mapper = mapper;
             _libroRepository = libroRepository;

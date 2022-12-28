@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos.Libros
 {
-    public class LibroDto
+    public class LibroDto : LibroFormDto
     {
         public int Id { get; set; }
         public DateTime FechaRegistro { get; set; }

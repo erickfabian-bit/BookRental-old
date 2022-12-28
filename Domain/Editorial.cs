@@ -11,7 +11,7 @@ namespace Domain
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public DateTime FechaRegistro { get; set; } = DateTime.Now;
+        public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
         public int Estado { get; set; } = 1;
     }
 }
