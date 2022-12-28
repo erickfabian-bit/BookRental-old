@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.Editoriales;
 using Application.Services.Abstractions;
 using AutoMapper;
+using Domain;
 using Infrastructure.Repositories.Abstractions;
 
 namespace Application.Services.Implementations
@@ -15,9 +16,41 @@ namespace Application.Services.Implementations
             _editorialRepository = editorialRepository;
         }
 
+        public async Task<EditorialDto> Create(EditorialFormDto dto)
+        { 
+            var entity = _mapper.Map<Editorial>(dto);
+
+            var response = await _editorialRepository.Create(entity);
+
+            return _mapper.Map<EditorialDto>(response);
+        }
+
+        public async Task<EditorialDto?> Edit(int id, EditorialFormDto dto)
+        {
+            var entity = _mapper.Map<Editorial>(dto);
+
+            var response = await _editorialRepository.Edit(id, entity);
+
+            return _mapper.Map<EditorialDto>(response);
+        }
+
+        public async Task<EditorialDto?> EnabledOrDisabled(int id)
+        {
+            var response = await _editorialRepository.EnabledOrDisabled(id);
+
+            return _mapper.Map<EditorialDto>(response);
+        }
+
+        public async Task<EditorialDto?> Find(int id)
+        {
+            var response = await _editorialRepository.Find(id);
+
+            return _mapper.Map<EditorialDto>(response);
+        }
+
         public async Task<IList<EditorialDto>> FindAll()
         {
-            var response = await _editorialRepository.findAll();
+            var response = await _editorialRepository.FindAll();
 
             return _mapper.Map<IList<EditorialDto>>(response);
         }
