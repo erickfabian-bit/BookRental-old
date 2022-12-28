@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Abstractions
 {
-    public interface IEditorialRepository : IRepositoryCrud<Editorial, int>
+    public interface ILibroRepository : IRepositoryCrud<Libro, int>
     {
+
     }
 }
