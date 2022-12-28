@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain;
+using Infrastructure.ModelMaps;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,14 @@ namespace Infrastructure.Context
             base.OnConfiguring(optionsBuilder);
 
             optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DBConnection"));
+        }
+
+        public DbSet<Editorial> Editoriales { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new EditorialMap());
         }
     }
 }
