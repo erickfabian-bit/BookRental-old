@@ -13,7 +13,5 @@ namespace Domain
         public string Nombre { get; set; }
         public DateTime FechaRegistro { get; set; } = DateTime.Now;
         public int Estado { get; set; }
-
-
     }
 }
