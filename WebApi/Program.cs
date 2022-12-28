@@ -1,8 +1,7 @@
-using Application.Services.Abstractions;
-using Application.Services.Implementations;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Infrastructure.Context;
-using Infrastructure.Repositories.Abstractions;
-using Infrastructure.Repositories.Implementations;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +12,44 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+    options.LowercaseQueryStrings = true;
+});
+
 // Data base context
 builder.Services.AddDbContext<ApplicationDBContext>();
 
 //DI
-builder.Services.AddScoped<IEditorialRepository, EditorialRepository>();
+//builder.Services.AddScoped<IEditorialRepository, EditorialRepository>();
 
-builder.Services.AddScoped<IEditorialService, EditorialService>();
+//builder.Services.AddScoped<IEditorialService, EditorialService>();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//busca en todo 
+//builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+//    .ConfigureContainer<ContainerBuilder>(options => {
+//        options.RegisterAssemblyTypes(Assembly.Load(""))
+//        .AsImplementedInterfaces()
+//        .InstancePerLifetimeScope();
+//    });
+
+//se especifica en que archivos
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(options => {
+        options.RegisterAssemblyTypes(Assembly.Load("Infrastructure"))
+        .Where(x => x.Name.EndsWith("Repository"))
+        .AsImplementedInterfaces()
+        .InstancePerLifetimeScope();
+        options.RegisterAssemblyTypes(Assembly.Load("Application"))
+        .Where(x => x.Name.EndsWith("Service"))
+        .AsImplementedInterfaces()
+        .InstancePerLifetimeScope();
+    });
+
+builder.Services.AddAutoMapper(Assembly.Load("Application"));
 
 var app = builder.Build();
 
