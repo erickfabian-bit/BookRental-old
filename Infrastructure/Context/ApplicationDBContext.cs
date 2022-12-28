@@ -27,6 +27,7 @@ namespace Infrastructure.Context
         }
 
         public DbSet<Editorial> Editoriales { get; set; }
+        public DbSet<Libro> Libros { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
