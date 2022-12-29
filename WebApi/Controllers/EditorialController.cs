@@ -2,6 +2,7 @@
 using Application.Services.Abstractions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Utils.Paginations;
 
 namespace WebApi.Controllers
 {
@@ -35,7 +36,7 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EditorialDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<Results<BadRequest, Ok<EditorialDto>>> Post(EditorialFormDto request)
-        { 
+        {
             var response = await _editorialService.Create(request);
             if (response == null) return TypedResults.BadRequest();
 
@@ -65,5 +66,15 @@ namespace WebApi.Controllers
 
             return TypedResults.Ok(response);
         }
+
+        [HttpGet("PaginatedSearch")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EditorialDto))]
+        public async Task<ResponsePagination<EditorialDto>> PaginatedSearch([FromQuery] RequestPagination<EditorialDto> request)
+        { 
+            var response = await _editorialService.PaginatedSearch(request);
+            return response;
+
+        }
+
     }
 }

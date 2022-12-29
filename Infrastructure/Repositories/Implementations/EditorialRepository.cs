@@ -69,7 +69,7 @@ namespace Infrastructure.Repositories.Implementations
                 query = query.Where(e =>
                     (!filter.Estado.HasValue || e.Estado == filter.Estado)
                     && (string.IsNullOrWhiteSpace(filter.Codigo) || e.Codigo.ToUpper().Contains(filter.Codigo.ToUpper().Trim()))
-                     && (string.IsNullOrWhiteSpace(filter.Nombre) || e.Nombre.ToUpper().Contains(filter.Nombre.ToUpper().Trim()))
+                    && (string.IsNullOrWhiteSpace(filter.Nombre) || e.Nombre.ToUpper().Contains(filter.Nombre.ToUpper().Trim()))
                 );
             }
 

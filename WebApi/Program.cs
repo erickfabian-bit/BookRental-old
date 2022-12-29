@@ -1,6 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Infrastructure.Context;
+using Infrastructure.Core.Paginations.Abstractions;
+using Infrastructure.Core.Paginations.Implementations;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +38,8 @@ builder.Services.AddDbContext<ApplicationDBContext>();
 //        .InstancePerLifetimeScope();
 //    });
 
+builder.Services.AddScoped(typeof(IPaginator<>), typeof(Paginator<>));
+
 //se especifica en que archivos
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(options => {
@@ -44,7 +48,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
         .AsImplementedInterfaces()
         .InstancePerLifetimeScope();
         options.RegisterAssemblyTypes(Assembly.Load("Application"))
-        //.Where(x => x.Name.EndsWith("Service"))
+        .Where(x => x.Name.EndsWith("Service"))
         .AsImplementedInterfaces()
         .InstancePerLifetimeScope();
     });

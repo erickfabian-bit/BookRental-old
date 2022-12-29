@@ -19,18 +19,17 @@ namespace Infrastructure.Core.Paginations.Implementations
             var sizePerPage = pagination.PerPage;
 
             var diference = (pagination.To - pagination.From) + 1;
-
             if (diference < pagination.PerPage) sizePerPage = diference;
 
             var currentPage = pagination.CurrentPage;
-
             if (currentPage > 0) currentPage = pagination.CurrentPage - 1;
 
+
             query = query.Skip(currentPage * sizePerPage).Take(sizePerPage);
-            var data  = await query.ToListAsync();
+            var data = await query.ToListAsync();
 
             var response = new ResponsePagination<T>(pagination)
-            { 
+            {
                 Data = data
             };
 

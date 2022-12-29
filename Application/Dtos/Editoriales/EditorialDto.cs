@@ -10,6 +10,6 @@ namespace Application.Dtos.Editoriales
     {
         public int Id { get; set; }
         public DateTime FechaRegistro { get; set; }
-        public int Estado { get; set; }
+        public int? Estado { get; set; }
     }
 }
