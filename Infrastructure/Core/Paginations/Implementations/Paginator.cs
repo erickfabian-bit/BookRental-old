@@ -11,8 +11,6 @@ namespace Infrastructure.Core.Paginations.Implementations
 {
     public class Paginator<T> : IPaginator<T>
     {
-        public Paginator() { }
-
         public async Task<ResponsePagination<T>> Paginate(IQueryable<T> query, RequestPagination<T> request)
         {
             var total = await query.CountAsync();
